@@ -74,12 +74,14 @@ ulTag.addEventListener('click', function(event) {
   let likeCount = "";
   let toyId = "";
   let editObj = {};
+  let par = "";
 
   if (event.target.className == 'like-btn') {
-    likeCount = parseInt(event.target.parentElement.querySelector('p').dataset.likeCount) + 1;
-    toyId = event.target.parentElement.querySelector('p').dataset.id;
-    event.target.parentElement.querySelector('p').dataset.likeCount = likeCount;
-    event.target.parentElement.querySelector('p').textContent = `liked ${likeCount} times`;
+    par = event.target.parentElement.querySelector('p');
+    likeCount = parseInt(par.dataset.likeCount) + 1;
+    toyId = par.dataset.id;
+    par.dataset.likeCount = likeCount;
+    par.textContent = `Liked ${likeCount} times`;
 
     editObj = {method: 'PATCH', headers:
         {
