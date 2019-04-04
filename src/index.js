@@ -55,16 +55,16 @@ let createObj = { method: 'POST', headers:
     })
   };
 
-fetch('http://localhost:3000/toys', createObj)
+const createNewToy = (object) =>{
+  return fetch('http://localhost:3000/toys', object)
   .then((response) => {
     return response.json()
-  }).then((data) => {
-    console.log(data)
-  }).catch((err) => console.log(err))
+  })
+};
 
-let newToy = {name: `${event.target[0].value}`, image: `${event.target[1].value}`, likes: 0}
-
-ulTag.innerHTML = createToyLi(newToy) + ulTag.innerHTML;
+createNewToy(createObj).then((newToy) => {
+  ulTag.innerHTML = createToyLi(newToy) + ulTag.innerHTML;
+})
 
 });
 
@@ -80,9 +80,6 @@ ulTag.addEventListener('click', function(event) {
     par = event.target.parentElement.querySelector('p');
     likeCount = parseInt(par.dataset.likeCount) + 1;
     toyId = par.dataset.id;
-    par.dataset.likeCount = likeCount;
-    par.textContent = `Liked ${likeCount} times`;
-
     editObj = {method: 'PATCH', headers:
         {
           "Content-Type": "application/json",
@@ -93,12 +90,16 @@ ulTag.addEventListener('click', function(event) {
           })
         };
 
-    fetch(`http://localhost:3000/toys/${toyId}`, editObj)
+const updateLikes = (toyId, object) => {
+  return fetch(`http://localhost:3000/toys/${toyId}`, object)
       .then((response) => {
         return response.json()
-      }).then((data) => {
-        console.log(data)
       }).catch((err) => console.log(err))
   };
 
+updateLikes(toyId, editObj).then((updatedToy) => {
+  par.dataset.likeCount = likeCount;
+  par.textContent = `Liked ${likeCount} times`;
+});
+}
 });
