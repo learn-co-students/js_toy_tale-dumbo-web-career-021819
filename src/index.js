@@ -80,18 +80,21 @@ const updateToyLikeCount = (id, likeCount) => {
 const toysdiv = document.querySelector("#toy-collection")
 
 toysdiv.addEventListener('click', (event) => {
+  // debugger
 	if(event.target.tagName === 'BUTTON'){
 	// console.log("eat")
     // const newToyLikes = toy.likes + 1
-    let newLikes = event.target.dataset.likes
-    newLikes++
+    let newLikes = parseInt(event.target.dataset.likes)
+    event.target.dataset.likes = ++newLikes
+    // newLikes++
     let toysId = event.target.dataset.id
 
     updateToyLikeCount(toysId,newLikes).then((parseJson) => {
        let newText = `${parseJson.likes} likes`
        let pTag =event.target.parentElement.querySelector('p')
-       pTag.innerText = newText
-         // debugger
+       pTag.innerText = newText // updating pTag but not my newText
+       // newText = newLikes
+
     })
 
 
