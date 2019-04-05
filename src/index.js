@@ -19,14 +19,12 @@ addBtn.addEventListener('click', () => {
 let ulTag = document.querySelector("#toy-collection");
 
 const createToyLi = (toy) => {
-  return `<li>
-    <div class="card">
+  return `<div class="card" data-id="${toy.id}">
       <h2>${toy.name}</h2>
       <img class="toy-avatar" src="${toy.image}"/>
-      <p data-like-count="${toy.likes}" data-id="${toy.id}"> Liked ${toy.likes} times </p>
+      <p> Liked <span>${toy.likes}</span> times </p>
       <button class="like-btn">Like <3 </button>
-     </div>
-    </li>`
+     </div>`
 }
 
 fetch('http://localhost:3000/toys')
@@ -77,16 +75,15 @@ ulTag.addEventListener('click', function(event) {
   let par = "";
 
   if (event.target.className == 'like-btn') {
-    par = event.target.parentElement.querySelector('p');
-    likeCount = parseInt(par.dataset.likeCount) + 1;
-    toyId = par.dataset.id;
+    likeCount = parseInt(event.target.parentElement.querySelector('span').innerText);
+    toyId = event.target.parentElement.dataset.id;
     editObj = {method: 'PATCH', headers:
         {
           "Content-Type": "application/json",
           Accept: "application/json"
         }, body: JSON.stringify(
           {
-            "likes": likeCount
+            "likes": ++likeCount
           })
         };
 
@@ -98,8 +95,7 @@ const updateLikes = (toyId, object) => {
   };
 
 updateLikes(toyId, editObj).then((updatedToy) => {
-  par.dataset.likeCount = likeCount;
-  par.textContent = `Liked ${likeCount} times`;
+  event.target.parentElement.querySelector('span').innerText = updatedToy.likes
 });
 }
 });
