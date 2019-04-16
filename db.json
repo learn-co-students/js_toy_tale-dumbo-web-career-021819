@@ -4,13 +4,14 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 18,
+      "poop_count": 14
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 13
     },
     {
       "id": 3,
@@ -71,6 +72,66 @@
       "image": "https://tribwgnam.files.wordpress.com/2017/04/flying-squirrel.jpg?quality=85&strip=all&w=400&h=225&crop=1",
       "likes": 0,
       "id": 12
+    },
+    {
+      "name": "meredith",
+      "image": "",
+      "likes": 0,
+      "id": 13
+    },
+    {
+      "name": "jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 14
+    },
+    {
+      "name": "jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 15
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 16
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 17
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 18
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 19
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 20
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 21
+    },
+    {
+      "name": "Jael",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 22
     }
   ]
 }
