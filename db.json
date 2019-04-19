@@ -136,7 +136,7 @@
     {
       "name": "meredith",
       "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
-      "likes": 0,
+      "likes": 6,
       "id": 23
     },
     {
@@ -144,6 +144,12 @@
       "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
       "likes": 0,
       "id": 24
+    },
+    {
+      "name": "Sadie",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 25
     }
   ]
 }

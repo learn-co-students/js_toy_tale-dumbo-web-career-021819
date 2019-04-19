@@ -26,21 +26,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 });
 
-// const renderToys = (toyCollectionDiv) => {
-//
-// }
+const toyCard = (toy) => {
+  return `<div class="card">
+    <h2>${toy.name}</h2>
+    <img src=${toy.image} class="toy-avatar" />
+    <p>${toy.likes} Likes </p>
+    <button class="like-btn" data-id=${toy.id}>Like <3</button>
+    </div>`
+}
 
 const fetchToys = (toyCollectionDiv) => {
   fetch("http://localhost:3000/toys").then((response) => {
     return response.json()
   }).then((toys) => {
     toys.forEach((toy) => {
-      toyCollectionDiv.innerHTML += `<div class="card">
-    <h2>${toy.name}</h2>
-    <img src=${toy.image} class="toy-avatar" />
-    <p>${toy.likes} Likes </p>
-    <button class="like-btn" data-id=${toy.id}>Like <3</button>
-  </div>`
+      toyCollectionDiv.innerHTML += toyCard(toy)
     })
   })
 }
@@ -77,12 +77,7 @@ const createNewToy = (toyName, toyImage, toyCollectionDiv) => {
   }).then((response) => {
     return response.json()
   }).then((toy) => {
-    toyCollectionDiv.innerHTML += `<div class="card">
-  <h2>${toy.name}</h2>
-  <img src=${toy.image} class="toy-avatar" />
-  <p>${toy.likes} Likes </p>
-  <button class="like-btn" data-id=${toy.id}>Like <3</button>
-</div>`
+    toyCollectionDiv.innerHTML += toyCard(toy)
   })
 }
 
