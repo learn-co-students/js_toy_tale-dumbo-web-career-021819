@@ -1,19 +1,9 @@
-const toyUrl = 'http://localhost:3000/toys'
-
-
-
-
 const addBtn = document.querySelector('#new-toy-btn')
 const toyForm = document.querySelector('.container')
 let addToy = false
-const formTag = document.querySelector('.add-toy-form')
 
-const toyCollectionDiv = document.getElementById("toy-collection")
+// YOUR CODE HERE
 
-
-
-
-////////POP UP FORM
 addBtn.addEventListener('click', () => {
   // hide & seek with the form
   addToy = !addToy
@@ -25,87 +15,106 @@ addBtn.addEventListener('click', () => {
   }
 })
 
-///////////CREATE TOY CARD
 
-const toyCard = (toy) => {
-  return `<div class="card">
+window.addEventListener('DOMContentLoaded', (event) => {
+    const toyCollectionDiv = document.getElementById("toy-collection")
+
+    // renderToys(toyCollectionDiv)
+    fetchToys(toyCollectionDiv);
+    addToyHandler(toyCollectionDiv);
+    increaseLikes(toyCollectionDiv);
+
+});
+
+// const renderToys = (toyCollectionDiv) => {
+//
+// }
+
+const fetchToys = (toyCollectionDiv) => {
+  fetch("http://localhost:3000/toys").then((response) => {
+    return response.json()
+  }).then((toys) => {
+    toys.forEach((toy) => {
+      toyCollectionDiv.innerHTML += `<div class="card">
     <h2>${toy.name}</h2>
     <img src=${toy.image} class="toy-avatar" />
-    <p data-id=${toy.id} data-likes=${toy.likes}>${toy.likes} Likes </p>
-    <button class="like-btn">Like <3</button>
+    <p>${toy.likes} Likes </p>
+    <button class="like-btn" data-id=${toy.id}>Like <3</button>
   </div>`
+    })
+  })
 }
 
-//////////FETCH TOYS AND LIST THEM
-fetch(toyUrl)
-.then((response) => {
-  return response.json()
-}).then((toyObject) => {
-  toyObject.forEach((toy) => {
-    toyCollectionDiv.innerHTML += toyCard(toy)
-  })
-})
+// when add submit button is clicked, fire a POST fetch request and then render new toy
 
-///////////CREATE NEW TOY
-const createNewToy = toy => {
-  return fetch((toyUrl), {
+// const toyCard = (toy) => {
+//   return
+// }
+
+const addToyHandler = (toyCollectionDiv) => {
+  let form = document.querySelector("form.add-toy-form")
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    let toyName = event.target.name.value
+    let toyImage = event.target.image.value
+    createNewToy(toyName, toyImage, toyCollectionDiv)
+  })
+}
+
+const createNewToy = (toyName, toyImage, toyCollectionDiv) => {
+  fetch("http://localhost:3000/toys", {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json"
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     },
-    body: JSON.stringify(toy)
+    body: JSON.stringify({
+      name: toyName,
+      image: toyImage,
+      likes: 0
+    })
   }).then((response) => {
-    console.log(response.json())
     return response.json()
+  }).then((toy) => {
+    toyCollectionDiv.innerHTML += `<div class="card">
+  <h2>${toy.name}</h2>
+  <img src=${toy.image} class="toy-avatar" />
+  <p>${toy.likes} Likes </p>
+  <button class="like-btn" data-id=${toy.id}>Like <3</button>
+</div>`
   })
 }
 
 
-formTag.addEventListener('submit', (event) => {
-  event.preventDefault();
+//////ADD AN EVENT LISTENER TO THE LIKE BUTTON, MAKE A PATCH REQUEST TO THE SERVER, AND SHOW THE TEXT ON THE PAGE TO REFLECT
 
-
-  let toyName = event.target.name.value;
-  let toyImage = event.target.image.value;
-
-  const toyObject = {
-    name: toyName,
-    image: toyImage,
-    likes: 0
-  }
-
-  createNewToy(toyObject)
-  .then((newToy) => {
-    toyCollectionDiv.innerHTML = createToyDiv(newToy) + toyCollectionDiv.innerHTML
-  })
-})
-
-
-toyCollectionDiv.addEventListener('click', (event) => {
-  if (event.target.tagName === 'BUTTON') {
-
-
-    const pTag = event.target.parentElement.querySelector('p')
-    pTag.dataset.likes++
-    pTag.innerHTML = `${pTag.dataset.likes} Likes`
-
-    const configObj = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        likes: parseInt(pTag.dataset.likes)
-      })
+const increaseLikes = (toyCollectionDiv) => {
+  toyCollectionDiv.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+      let likesText = event.target.parentElement.querySelector('p').innerText
+      let toyLikes = parseInt(likesText.split(' ')[0])
+      toyLikes++;
+      let toyId = event.target.dataset.id
+      // debugger;
+      increaseLikesFetch(toyId, toyLikes);
+      event.target.parentElement.querySelector('p').innerText = `${toyLikes} Likes`
     }
+  })
+}
 
-    fetch(`${toyUrl}/${pTag.dataset.id}`, configObj)
-  }
-})
-
-
+const increaseLikesFetch = (toyId, toyLikes) => {
+  fetch(`http://localhost:3000/toys/${toyId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      likes: toyLikes
+    })
+  })
+}
 
 
 

@@ -4,14 +4,14 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 18,
+      "likes": 19,
       "poop_count": 14
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 13
+      "likes": 21
     },
     {
       "id": 3,
@@ -132,6 +132,18 @@
       "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
       "likes": 0,
       "id": 22
+    },
+    {
+      "name": "meredith",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 23
+    },
+    {
+      "name": "meredith",
+      "image": "https://www.akc.org/wp-content/themes/akc/component-library/assets/img/welcome.jpg",
+      "likes": 0,
+      "id": 24
     }
   ]
 }
